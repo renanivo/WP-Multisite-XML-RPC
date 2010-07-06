@@ -1,0 +1,61 @@
+Multisite XML-RPC
+================================================================================
+
+This plugin adds some Multisite-specific functions to WordPress' XML-RPC interface.
+The functions are:
+
+Create Blog (ms.CreateBlog)
+--------------------------------------------------------------------------------
+Creates a new blog calling wpmu_create_blog (documentation at
+http://codex.wordpress.org/WPMU_Functions/wpmu_create_blog).
+
+Like other WordPress' XML-RPC functions, expects an array with user, password and
+function parameters (the parameters of wpmu_create_blog). Ex:
+
+array(
+	'admin',
+	'password',
+	array(
+		'example.com',
+		'path',
+		'Blog Title',
+		user_id,
+	)
+);
+
+This implementation differs from the codex documented one: You can
+use an e-mail instead of user id. If so, a new user will be created (if not exists)
+or the user_id of the e-mail owner will be used.
+--------------------------------------------------------------------------------
+
+Get Blog Id
+--------------------------------------------------------------------------------
+Returns the blog_id of given domain and path in a XML-RPC request.
+Expects an array with user, password and function parameters. The parameters are:
+$domain  The blog domain
+$path    The blog path
+Ex:
+
+array(
+	'admin',
+	'password',
+	array(
+		'example.com',
+		'path'
+	)
+);
+--------------------------------------------------------------------------------
+
+Update Archived
+--------------------------------------------------------------------------------
+Updates the archived status of a blog calling WP's update_archived function
+(documentation at http://codex.wordpress.org/WPMU_Functions/update_archived)
+
+This function expects an array with user, password and function parameters
+(the parameters of updated_archived). Ex:
+
+array(
+	'admin',
+	'password',
+	array(2, 1)
+);
