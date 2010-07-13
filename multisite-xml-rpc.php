@@ -146,7 +146,7 @@ function msxmlrpc_update_archived($args) {
  */
 function msxmlrpc_methods($methods) {
 	$methods['ms.CreateBlog']     = 'msxmlrpc_create_blog';
-	$methods['ms.GetSiteId']      = 'msxmlrpc_get_blog_id';
+	$methods['ms.GetBlogId']      = 'msxmlrpc_get_blog_id';
 	$methods['ms.UpdateArchived'] = 'msxmlrpc_update_archived';
 	return $methods;
 }
