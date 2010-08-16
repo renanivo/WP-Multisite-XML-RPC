@@ -18,7 +18,7 @@ function check_arguments($args) {
 	$wp_xmlrpc_server->escape($args);
 
 	if ( !$wp_xmlrpc_server->login($args[0], $args[1]) ) {
-		return $wp_xmlrpc_server->error;
+		return new IXR_Error(401, $wp_xmlrpc_server->error);
 	}
 
 	return $args[2];
@@ -78,7 +78,7 @@ function msxmlrpc_create_blog($args) {
 
 			$user_id = wpmu_create_user(
 				$parameters['path'],
-				generate_random_password(),
+				wp_generate_password(),
 				$parameters['user_id']
 			);
 		}
