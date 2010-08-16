@@ -11,7 +11,7 @@ class MultisiteXmlRpcTest extends PHPUnit_Framework_TestCase {
 			'wp_xmlrpc_server', array('escape', 'login')
 		);
 		
-		$wp_xmlrpc_server->expects($this->once())
+		$wp_xmlrpc_server->expects($this->atLeastOnce())
 			->method('escape')
 			->will($this->returnArgument(0));
 
@@ -47,7 +47,7 @@ class MultisiteXmlRpcTest extends PHPUnit_Framework_TestCase {
 		$this->assertTrue(is_int($blog_id));
 	}
 
-	function testLoginFailShouldRaiseError() {
+	function testLoginFailShouldReturnError() {
 		global $wp_xmlrpc_server, $wpdb;
 
 		$this->getMock("IXR_Error");
@@ -72,5 +72,34 @@ class MultisiteXmlRpcTest extends PHPUnit_Framework_TestCase {
 		$this->assertTrue(is_object($blog_id));
 		$this->assertEquals(get_class($blog_id), "IXR_Error");
 	}
+	
+	function testSiteAlreadyExistsShouldReturnError() {
+		global $wp_xmlrpc_server, $wpdb;
 
+		$wp_xmlrpc_server->expects($this->once())
+			->method('login')
+			->will($this->returnValue(true));
+
+		$wpdb->expects($this->once())
+			->method('get_results')
+			->will($this->returnValue(array(
+				(object)array('blog_id' => rand(1,100)),
+			)));
+
+		$this->getMock("IXR_Error");
+
+		$blog_id = msxmlrpc_create_blog(array(
+			'test',
+			'test',
+			array(
+				'domain'  => 'example.com',
+				'path'    => "path",
+				'title'   => "Title ",
+				'user_id' => "user@example.com",
+			),
+		));
+
+		$this->assertTrue(is_object($blog_id));
+		$this->assertEquals(get_class($blog_id), "IXR_Error");
+	}
 }

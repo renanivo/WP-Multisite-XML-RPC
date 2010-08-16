@@ -73,7 +73,7 @@ function msxmlrpc_create_blog($args) {
 			);
 
 			if ( is_wp_error($error) ) {
-				return $error->get_error_message();
+				return new IXR_Error(500, $error->get_error_message());
 			}
 
 			$user_id = wpmu_create_user(
@@ -87,7 +87,7 @@ function msxmlrpc_create_blog($args) {
 	}
 
 	if ( get_blog_id($parameters['domain'], $parameters['path']) !== false ) {
-		return __("Site already exists.");
+		return new IXR_Error(500, __("Site already exists."));
 	}
 
 	if ( !isset($parameters['meta']) )    $parameters['meta']    = "";
