@@ -118,7 +118,11 @@ function msxmlrpc_get_blog_id($args) {
 		return $parameters;
 	}
 
-	return get_blog_id($parameters['domain'], $parameters['path']);
+	if ( ($blog_id = get_blog_id($parameters['domain'], $parameters['path'])) !== false ) {
+		return $blog_id;
+	} else {
+		return new IXR_Error(404, __("No sites found."));
+	}
 }
 
 /**

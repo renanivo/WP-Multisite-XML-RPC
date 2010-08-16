@@ -102,4 +102,30 @@ class MultisiteXmlRpcTest extends PHPUnit_Framework_TestCase {
 		$this->assertTrue(is_object($blog_id));
 		$this->assertEquals(get_class($blog_id), "IXR_Error");
 	}
+
+	function testGetBlogIdShouldReturnErrorWhenSiteNotFound() {
+		global $wp_xmlrpc_server, $wpdb;
+
+		$wp_xmlrpc_server->expects($this->once())
+			->method('login')
+			->will($this->returnValue(true));
+
+		$wpdb->expects($this->once())
+			->method('get_results')
+			->will($this->returnValue( array() ));
+
+		$this->getMock("IXR_Error");
+
+		$blog_id = msxmlrpc_get_blog_id(array(
+			'test',
+			'test',
+			array(
+				'domain' => "example.com",
+				'path'   => "path",
+			),
+		));
+
+		$this->assertTrue(is_object($blog_id));
+		$this->assertEquals(get_class($blog_id), "IXR_Error");
+	}
 }
