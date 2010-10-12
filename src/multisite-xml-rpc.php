@@ -5,7 +5,7 @@ Plugin URI: http://github.com/renanivo/WP-Multisite-XML-RPC
 Description: Enable Multisite specific functions to XML-RPC API
 Author: Renan Ivo
 Author URI: http://renanivo.com.br
-Version: 0.5
+Version: 1.0
 */
 
 /**
