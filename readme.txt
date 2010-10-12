@@ -25,7 +25,7 @@ refer to the [wiki](http://wiki.github.com/renanivo/WP-Multisite-XML-RPC/) for f
 
 = What is XML-RPC? =
 
-According to [Wikipedia](http://en.wikipedia.org/wiki/Xml-rpc), XML-RPC is a remote procedure call (RPC) protocol which uses XML to encode its calls and HTTP as a transport mechanism.
+According to [Wikipedia](http://en.wikipedia.org/wiki/Xml-rpc), XML-RPC is a remote procedure call (RPC) protocol which uses XML to encode its calls and HTTP as a transport mechanism. Refer to the [WordPress Wiki](http://codex.wordpress.org/XML-RPC_Support) for further explanation about WP's XML-RPC capabilities.
 
 = My plugin is enabled but is not working, what should I do? =
 
