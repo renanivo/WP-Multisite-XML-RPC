@@ -1,7 +1,7 @@
 <?php
 require_once "PHPUnit/Framework.php";
 require_once "MockPress/mockpress.php";
-require_once "src/multisite-xml-rpc.php";
+require_once dirname(dirname(__FILE__)) . "/src/multisite-xml-rpc.php";
 
 class MultisiteXmlRpcTest extends PHPUnit_Framework_TestCase {
 
