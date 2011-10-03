@@ -1,6 +1,6 @@
 <?php
 require_once "PHPUnit/Framework.php";
-require_once dirname(dirname(__FILE__)) . "/xmlrpc-client.php";
+require_once "xmlrpc-client.php";
 
 class IntegrationTest extends PHPUnit_Framework_TestCase {
 	public $xrClient;
@@ -10,7 +10,7 @@ class IntegrationTest extends PHPUnit_Framework_TestCase {
 	}
 
 	function testCreateBlog() {
-		$blog_id = $this->xrClient->request("ms.CreateBlog", array(
+        $blog_id = $this->xrClient->ms->CreateBlog(array(
 			'admin',
 			'password',
 			array(
@@ -25,7 +25,7 @@ class IntegrationTest extends PHPUnit_Framework_TestCase {
 	}
 
 	function testGetBlogId() {
-		$blog_id = $this->xrClient->request("ms.GetBlogId", array(
+        $blog_id = $this->xrClient->ms->GetBlogId(array(
 			'admin',
 			'password',
 			array(
@@ -37,7 +37,7 @@ class IntegrationTest extends PHPUnit_Framework_TestCase {
 	}
 
 	function testUpdateArchived() {
-		$archived_status = $this->xrClient->request("ms.UpdateArchived", array(
+        $archived_status = $this->xrClient->ms->UpdateArchived(array(
 			'admin',
 			'password',
 			array(
