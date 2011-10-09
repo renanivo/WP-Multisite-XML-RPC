@@ -29,7 +29,7 @@ According to [Wikipedia](http://en.wikipedia.org/wiki/Xml-rpc), XML-RPC is a rem
 
 = My plugin is enabled but is not working, what should I do? =
 
-Maybe the remote publishing function is not enabled. To enable it, chek 'Enable the WordPress, Movable Type, MetaWeblog and Blogger XML-RPC publishing protocols' through 'Writing' menu and click 'Save Changes' (step 3 in *Installation*).
+Maybe the remote publishing function is not enabled. To enable it, check 'Enable the WordPress, Movable Type, MetaWeblog and Blogger XML-RPC publishing protocols' through 'Writing' menu and click 'Save Changes' (step 3 in *Installation*).
 
 == Installation ==
 1. Upload `multisite-xml-rpc.php` to the `/wp-content/plugins/` directory
