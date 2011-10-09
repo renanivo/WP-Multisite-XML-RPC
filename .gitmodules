@@ -1,0 +1,3 @@
+[submodule "test/MockPress"]
+	path = test/MockPress
+	url = git://github.com/renanivo/mockpress.git
