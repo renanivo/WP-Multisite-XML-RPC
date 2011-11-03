@@ -1,4 +1,5 @@
 <?php
+require_once "PHPUnit/Framework.php";
 require_once "MockPress/mockpress.php";
 require_once dirname(dirname(__FILE__)) . "/src/multisite-xml-rpc.php";
 
@@ -126,71 +127,5 @@ class MultisiteXmlRpcTest extends PHPUnit_Framework_TestCase {
 
 		$this->assertTrue(is_object($blog_id));
 		$this->assertEquals(get_class($blog_id), "IXR_Error");
-	}
-
-	function testGetBlogIdShouldAppendASlashToThePathWhenUsingSubfolderConfiguration() {
-		global $wp_xmlrpc_server, $wpdb;
-
-		_set_multisite_configuration_type('subfolder');
-
-		$wp_xmlrpc_server->expects($this->once())
-			->method('login')
-			->will($this->returnValue(true));
-
-		$wpdb->expects($this->once())
-			->method('prepare')
-			->with(
-				"SELECT blog_id FROM wp_blogs WHERE domain = %s AND path = %s LIMIT 1",
-				"example.com",
-				"path/"
-			);
-
-		$wpdb->expects($this->once())
-			->method('get_results')
-			->will($this->returnValue( array() ));
-
-		$this->getMock("IXR_Error");
-
-		$blog_id = msxmlrpc_get_blog_id(array(
-			'test',
-			'test',
-			array(
-				'domain' => "example.com",
-				'path'   => "path",
-			),
-		));
-	}
-
-	function testGetBlogIdShouldNotAppendASlashToThePathWhenUsingSubdomainConfiguration() {
-		global $wp_xmlrpc_server, $wpdb;
-
-		_set_multisite_configuration_type('subdomain');
-
-		$wp_xmlrpc_server->expects($this->once())
-			->method('login')
-			->will($this->returnValue(true));
-
-		$wpdb->expects($this->once())
-			->method('prepare')
-			->with(
-				"SELECT blog_id FROM wp_blogs WHERE domain = %s AND path = %s LIMIT 1",
-				"example.com",
-				"path"
-			);
-
-		$wpdb->expects($this->once())
-			->method('get_results')
-			->will($this->returnValue( array() ));
-
-		$this->getMock("IXR_Error");
-
-		$blog_id = msxmlrpc_get_blog_id(array(
-			'test',
-			'test',
-			array(
-				'domain' => "example.com",
-				'path'   => "path",
-			),
-		));
 	}
 }

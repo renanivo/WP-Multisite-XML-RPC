@@ -32,13 +32,10 @@ function check_arguments($args) {
  */
 function get_blog_id($domain, $path) {
 	global $wpdb;
-
-	$path .= is_subdomain_install() ? "" : "/";
-
 	$domain_found = $wpdb->get_results($wpdb->prepare(
 		"SELECT blog_id FROM wp_blogs WHERE domain = %s AND path = %s LIMIT 1",
 		$domain,
-		$path
+		$path . '/'
 	));
 
 	if ( !count($domain_found) ) {
