@@ -45,12 +45,12 @@ class XmlRpcClient
         ); 
         
         $file       = file_get_contents( $this->_url, false, $context ); 
-        $response = xmlrpc_decode( $file ); 
+		$response = xmlrpc_decode( $file ); 
         
-        if( !$response ) 
-            throw new XmlRpcClientException( array( 'faultString' => 'Invalid response from ' . $this->_url ) ); 
+        if( is_null($response) ) 
+			throw new XmlRpcClientException( array( 'faultString' => 'Invalid response from ' . $this->_url, 'faultCode' => 999 ) ); 
         
-        if( xmlrpc_is_fault( $response ) ) 
+        if( @xmlrpc_is_fault( $response ) ) 
             throw new XmlRpcClientException( $response ); 
         
         return $response; 
